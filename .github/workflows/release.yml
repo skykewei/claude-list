@@ -48,10 +48,6 @@ jobs:
             target: aarch64-apple-darwin
             asset_name: claude-list-darwin-arm64
             archive_ext: tar.gz
-          - os: macos-13
-            target: x86_64-apple-darwin
-            asset_name: claude-list-darwin-amd64
-            archive_ext: tar.gz
           - os: windows-latest
             target: x86_64-pc-windows-msvc
             asset_name: claude-list-windows-amd64
