@@ -31,13 +31,19 @@ impl DetailFormatter for JsonFormatter {
                     match obj.get_mut("Skill") {
                         Some(skill_obj) => {
                             if let Some(so) = skill_obj.as_object_mut() {
-                                so.insert("raw_content".to_string(), serde_json::Value::String(raw_content));
+                                so.insert(
+                                    "raw_content".to_string(),
+                                    serde_json::Value::String(raw_content),
+                                );
                             }
                         }
                         None => {
                             // Try "Mcp"
                             if let Some(mcp) = value.as_object_mut() {
-                                mcp.insert("raw_content".to_string(), serde_json::Value::String(raw_content));
+                                mcp.insert(
+                                    "raw_content".to_string(),
+                                    serde_json::Value::String(raw_content),
+                                );
                             }
                         }
                     }

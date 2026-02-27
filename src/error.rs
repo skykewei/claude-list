@@ -41,9 +41,13 @@ impl std::error::Error for CliError {}
 impl fmt::Display for LocalSourceError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            LocalSourceError::ConfigNotFound(p) => write!(f, "Config directory not found: {}", p.display()),
+            LocalSourceError::ConfigNotFound(p) => {
+                write!(f, "Config directory not found: {}", p.display())
+            }
             LocalSourceError::InvalidConfig(s) => write!(f, "Invalid config file: {}", s),
-            LocalSourceError::PermissionDenied(p) => write!(f, "Permission denied: {}", p.display()),
+            LocalSourceError::PermissionDenied(p) => {
+                write!(f, "Permission denied: {}", p.display())
+            }
         }
     }
 }

@@ -1,5 +1,8 @@
 use crate::error::{CliError, LocalSourceError};
-use crate::model::{ConnectionStatus, McpConfig, McpDetail, McpServer, Skill, SkillDetail, SkillStartMatter, SourceType};
+use crate::model::{
+    ConnectionStatus, McpConfig, McpDetail, McpServer, Skill, SkillDetail, SkillStartMatter,
+    SourceType,
+};
 use crate::source::{McpSource, SkillSource};
 use serde::Deserialize;
 use std::collections::HashMap;
@@ -93,7 +96,9 @@ fn parse_skill_md_full(content: &str) -> (SkillStartMatter, String) {
 
             current_key = Some(key.trim());
             current_value = value.trim().to_string();
-        } else if current_key.is_some() && (trimmed.starts_with('-') || (!trimmed.is_empty() && !trimmed.contains(':'))) {
+        } else if current_key.is_some()
+            && (trimmed.starts_with('-') || (!trimmed.is_empty() && !trimmed.contains(':')))
+        {
             // Multi-line value or list item
             if trimmed.starts_with('-') {
                 current_value.push('\n');
@@ -123,7 +128,7 @@ fn clean_value(value: &str) -> String {
     if (trimmed.starts_with('"') && trimmed.ends_with('"') && trimmed.len() > 1)
         || (trimmed.starts_with('\'') && trimmed.ends_with('\'') && trimmed.len() > 1)
     {
-        trimmed[1..trimmed.len()-1].to_string()
+        trimmed[1..trimmed.len() - 1].to_string()
     } else {
         trimmed.to_string()
     }
@@ -201,7 +206,9 @@ impl SkillSource for LocalSource {
 
 impl LocalSource {
     fn load_skill_detail(&self, skill: &Skill) -> Result<SkillDetail, CliError> {
-        let skill_md_path = skill.path.as_ref()
+        let skill_md_path = skill
+            .path
+            .as_ref()
             .ok_or_else(|| LocalSourceError::ConfigNotFound(PathBuf::from("SKILL.md")))?
             .join("SKILL.md");
 
@@ -303,7 +310,9 @@ impl McpSource for LocalSource {
 
 impl LocalSource {
     fn load_mcp_detail(&self, mcp: &McpServer) -> Result<McpDetail, CliError> {
-        let config = mcp.config.clone()
+        let config = mcp
+            .config
+            .clone()
             .ok_or_else(|| CliError::NotFound(mcp.name.clone(), vec![]))?;
 
         // Determine source path and type

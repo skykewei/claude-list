@@ -1,5 +1,5 @@
-use crate::model::{ClaudeList, DetailItem};
 use crate::error::CliError;
+use crate::model::{ClaudeList, DetailItem};
 
 pub mod json;
 pub mod table;
