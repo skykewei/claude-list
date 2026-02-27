@@ -320,14 +320,7 @@ impl LocalSource {
         let mcp_path = self.claude_dir.join("mcp.json");
 
         let (source_path, source_type) = if settings_path.exists() {
-            (
-                settings_path.clone(),
-                if mcp_path.exists() {
-                    "settings.json".to_string()
-                } else {
-                    "settings.json".to_string()
-                },
-            )
+            (settings_path.clone(), "settings.json".to_string())
         } else if mcp_path.exists() {
             (mcp_path.clone(), "mcp.json".to_string())
         } else {

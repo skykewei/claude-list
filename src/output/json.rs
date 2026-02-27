@@ -11,6 +11,12 @@ impl JsonFormatter {
     }
 }
 
+impl Default for JsonFormatter {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Formatter for JsonFormatter {
     fn format(&self, data: &ClaudeList) -> Result<String, CliError> {
         let json = serde_json::to_string_pretty(data)?;
